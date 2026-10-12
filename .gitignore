@@ -1,0 +1,6 @@
+model/model_rf.joblib
+model/model_et.joblib
+__pycache__/
+*.pyc
+.venv/
+.streamlit/secrets.toml

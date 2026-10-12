@@ -1,0 +1,384 @@
+{
+  "title": "AeroML - NACA Airfoil Aerodynamic Predictor",
+  "primary_model": "xgb",
+  "architecture": "XGBoost",
+  "selection": {
+    "model": "xgb",
+    "rule_choice": "mlp",
+    "reason": "manual override in config.yaml (deployment.architecture); the rule chose mlp"
+  },
+  "hyperparameters": {
+    "subsample": 0.7,
+    "reg_lambda": 10.0,
+    "n_estimators": 1000,
+    "min_child_weight": 1,
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "colsample_bytree": 0.8
+  },
+  "training_date": "2026-10-12T09:08:21",
+  "training_airfoils": 88,
+  "training_rows": 47280,
+  "test_airfoils": [
+    "NACA0006",
+    "NACA0012",
+    "NACA1408",
+    "NACA1410",
+    "NACA1412",
+    "NACA23021",
+    "NACA24112",
+    "NACA63",
+    "NACA63212",
+    "NACA632615",
+    "NACA64008A",
+    "NACA641212",
+    "NACA642015A",
+    "NACA64208",
+    "NACA64210",
+    "NACA644221",
+    "NACA644421",
+    "NACA64A010",
+    "NACA64A210",
+    "NACA651212_B",
+    "NACA654421_A",
+    "NACA66206"
+  ],
+  "test_metrics": {
+    "Cl": {
+      "R2": 0.989181330552949,
+      "R2_log": NaN,
+      "RMSE": 0.07601794031602886,
+      "MAE": 0.05100230842290361,
+      "MAPE": 10.463453955157384,
+      "n": 11064
+    },
+    "Cd": {
+      "R2": 0.9260393696719397,
+      "R2_log": 0.9685017630566304,
+      "RMSE": 0.007500529719859088,
+      "MAE": 0.0037888072150763156,
+      "MAPE": 9.92561449602743,
+      "n": 11064
+    }
+  },
+  "accuracy_given_up_vs_full_model": {
+    "Cl": {
+      "R2": 0.0,
+      "RMSE": 0.0
+    },
+    "Cd": {
+      "R2": 0.0,
+      "RMSE": 0.0
+    }
+  },
+  "models": [
+    {
+      "kind": "xgb",
+      "name": "XGBoost",
+      "file": "model_xgb.joblib",
+      "primary": true,
+      "hyperparameters": {
+        "subsample": 0.7,
+        "reg_lambda": 10.0,
+        "n_estimators": 1000,
+        "min_child_weight": 1,
+        "max_depth": 8,
+        "learning_rate": 0.05,
+        "colsample_bytree": 0.8
+      },
+      "deployment_compressed": false,
+      "train_seed": 0,
+      "train_seconds": null,
+      "size_mb_memory": 22.462278,
+      "size_mb_disk": 7.679746,
+      "infer_us_per_sample": 46.35075921745296,
+      "test_metrics": {
+        "Cl": {
+          "R2": 0.989181330552949,
+          "R2_log": NaN,
+          "RMSE": 0.07601794031602886,
+          "MAE": 0.05100230842290361,
+          "MAPE": 10.463453955157384,
+          "n": 11064
+        },
+        "Cd": {
+          "R2": 0.9260393696719397,
+          "R2_log": 0.9685017630566304,
+          "RMSE": 0.007500529719859088,
+          "MAE": 0.0037888072150763156,
+          "MAPE": 9.92561449602743,
+          "n": 11064
+        }
+      },
+      "full_model_test_metrics": {
+        "Cl": {
+          "R2": 0.989181330552949,
+          "R2_log": NaN,
+          "RMSE": 0.07601794031602886,
+          "MAE": 0.05100230842290361,
+          "MAPE": 10.463453955157384
+        },
+        "Cd": {
+          "R2": 0.9260393696719397,
+          "R2_log": 0.9685017630566304,
+          "RMSE": 0.007500529719859088,
+          "MAE": 0.0037888072150763156,
+          "MAPE": 9.92561449602743
+        }
+      },
+      "accuracy_given_up": {
+        "Cl": {
+          "R2": 0.0,
+          "RMSE": 0.0
+        },
+        "Cd": {
+          "R2": 0.0,
+          "RMSE": 0.0
+        }
+      }
+    },
+    {
+      "kind": "rf",
+      "name": "Random Forest",
+      "file": "model_rf.joblib",
+      "primary": false,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "min_samples_leaf": 5,
+        "max_features": 0.5,
+        "max_depth": 25
+      },
+      "deployment_compressed": true,
+      "train_seed": 0,
+      "train_seconds": 18.36760730005335,
+      "size_mb_memory": 216.701374,
+      "size_mb_disk": 89.680374,
+      "infer_us_per_sample": 44.783694864134894,
+      "test_metrics": {
+        "Cl": {
+          "R2": 0.9872891524407743,
+          "R2_log": NaN,
+          "RMSE": 0.08239795394235941,
+          "MAE": 0.05672864228203305,
+          "MAPE": 11.772096652839169,
+          "n": 11064
+        },
+        "Cd": {
+          "R2": 0.9031199117679883,
+          "R2_log": 0.9609844705610608,
+          "RMSE": 0.008584379271009492,
+          "MAE": 0.0042211944923927465,
+          "MAPE": 11.464469769299356,
+          "n": 11064
+        }
+      },
+      "full_model_test_metrics": {
+        "Cl": {
+          "R2": 0.9880287924166105,
+          "R2_log": NaN,
+          "RMSE": 0.07996467074314308,
+          "MAE": 0.054432739699462954,
+          "MAPE": 11.268516456888833
+        },
+        "Cd": {
+          "R2": 0.9146762239687636,
+          "R2_log": 0.9637371588248155,
+          "RMSE": 0.00805613374989063,
+          "MAE": 0.003991241227676512,
+          "MAPE": 11.031093857547356
+        }
+      },
+      "accuracy_given_up": {
+        "Cl": {
+          "R2": 0.0007396399758361483,
+          "RMSE": 0.0024332831992163323
+        },
+        "Cd": {
+          "R2": 0.011556312200775243,
+          "RMSE": 0.0005282455211188617
+        }
+      }
+    },
+    {
+      "kind": "et",
+      "name": "Extra Trees",
+      "file": "model_et.joblib",
+      "primary": false,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "min_samples_leaf": 5,
+        "max_features": 1.0,
+        "max_depth": 25
+      },
+      "deployment_compressed": true,
+      "train_seed": 0,
+      "train_seconds": 24.089958299999125,
+      "size_mb_memory": 329.138985,
+      "size_mb_disk": 140.127623,
+      "infer_us_per_sample": 54.18713846530453,
+      "test_metrics": {
+        "Cl": {
+          "R2": 0.9894143191339013,
+          "R2_log": NaN,
+          "RMSE": 0.07519493200981739,
+          "MAE": 0.05080993721046324,
+          "MAPE": 10.305163867086014,
+          "n": 11064
+        },
+        "Cd": {
+          "R2": 0.9171361222174566,
+          "R2_log": 0.9648980636792748,
+          "RMSE": 0.007939154633249379,
+          "MAE": 0.0038114521427591082,
+          "MAPE": 10.595909244551349,
+          "n": 11064
+        }
+      },
+      "full_model_test_metrics": {
+        "Cl": {
+          "R2": 0.9899732800411046,
+          "R2_log": NaN,
+          "RMSE": 0.07318273151168195,
+          "MAE": 0.04896148571945046,
+          "MAPE": 9.960829909448485
+        },
+        "Cd": {
+          "R2": 0.9259943493036072,
+          "R2_log": 0.9659748377539745,
+          "RMSE": 0.007502812185802569,
+          "MAE": 0.003642764722877297,
+          "MAPE": 10.374536997553006
+        }
+      },
+      "accuracy_given_up": {
+        "Cl": {
+          "R2": 0.0005589609072033097,
+          "RMSE": 0.0020122004981354413
+        },
+        "Cd": {
+          "R2": 0.008858227086150694,
+          "RMSE": 0.0004363424474468098
+        }
+      }
+    },
+    {
+      "kind": "mlp",
+      "name": "MLP",
+      "file": "model_mlp.joblib",
+      "primary": false,
+      "hyperparameters": {
+        "learning_rate_init": 0.003,
+        "hidden_layer_sizes": [
+          256,
+          128,
+          64
+        ],
+        "batch_size": 512,
+        "alpha": 0.0001
+      },
+      "deployment_compressed": false,
+      "train_seed": 0,
+      "train_seconds": null,
+      "size_mb_memory": 1.471933,
+      "size_mb_disk": 1.406884,
+      "infer_us_per_sample": 6.565663406564109,
+      "test_metrics": {
+        "Cl": {
+          "R2": 0.9894480304123956,
+          "R2_log": NaN,
+          "RMSE": 0.07507510321807792,
+          "MAE": 0.04729589838426124,
+          "MAPE": 10.053962626570987,
+          "n": 11064
+        },
+        "Cd": {
+          "R2": 0.9214707819786749,
+          "R2_log": 0.9755562695867408,
+          "RMSE": 0.00772871460835266,
+          "MAE": 0.0032235621689467755,
+          "MAPE": 7.71949743853477,
+          "n": 11064
+        }
+      },
+      "full_model_test_metrics": {
+        "Cl": {
+          "R2": 0.9894480304123956,
+          "R2_log": NaN,
+          "RMSE": 0.07507510321807792,
+          "MAE": 0.04729589838426124,
+          "MAPE": 10.053962626570987
+        },
+        "Cd": {
+          "R2": 0.9214707819786749,
+          "R2_log": 0.9755562695867408,
+          "RMSE": 0.00772871460835266,
+          "MAE": 0.0032235621689467755,
+          "MAPE": 7.71949743853477
+        }
+      },
+      "accuracy_given_up": {
+        "Cl": {
+          "R2": 0.0,
+          "RMSE": 0.0
+        },
+        "Cd": {
+          "R2": 0.0,
+          "RMSE": 0.0
+        }
+      }
+    }
+  ],
+  "training_envelope": {
+    "max_thickness": [
+      0.059899056,
+      0.240199544
+    ],
+    "max_camber": [
+      0.0,
+      0.059989079
+    ],
+    "Re": [
+      50000.0,
+      1000000.0
+    ],
+    "Alpha": [
+      -19.75,
+      19.25
+    ]
+  },
+  "re_values": [
+    50000.0,
+    100000.0,
+    200000.0,
+    500000.0,
+    1000000.0
+  ],
+  "features": [
+    "Au0",
+    "Au1",
+    "Au2",
+    "Au3",
+    "Au4",
+    "Al0",
+    "Al1",
+    "Al2",
+    "Al3",
+    "Al4",
+    "max_thickness",
+    "x_max_thickness",
+    "max_camber",
+    "x_max_camcer",
+    "Re",
+    "Alpha"
+  ],
+  "cd_target": "Cd modelled as log(Cd); inverted at prediction",
+  "data_source": "XFOIL panel-method polars from the public NACA airfoil database, 5-term CST parameterisation per surface. Limited fidelity beyond stall.",
+  "airfoil_table": "airfoils.csv",
+  "polar_table": "polars.csv.gz",
+  "app": {
+    "alpha_min": -20.0,
+    "alpha_max": 20.0,
+    "alpha_step": 0.25,
+    "default_airfoil": "NACA2412"
+  }
+}

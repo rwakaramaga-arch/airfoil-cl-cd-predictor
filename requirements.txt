@@ -1,0 +1,9 @@
+# Runtime dependencies of the Streamlit app only. scikit-learn and xgboost
+# must match the versions the models were pickled with.
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+xgboost==3.4.1
+joblib==1.6.0
+matplotlib==3.11.2
+streamlit==1.59.1

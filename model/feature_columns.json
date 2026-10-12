@@ -1,0 +1,24 @@
+{
+  "features": [
+    "Au0",
+    "Au1",
+    "Au2",
+    "Au3",
+    "Au4",
+    "Al0",
+    "Al1",
+    "Al2",
+    "Al3",
+    "Al4",
+    "max_thickness",
+    "x_max_thickness",
+    "max_camber",
+    "x_max_camcer",
+    "Re",
+    "Alpha"
+  ],
+  "targets": [
+    "Cl",
+    "Cd"
+  ]
+}
