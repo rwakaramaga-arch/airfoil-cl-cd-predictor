@@ -2,6 +2,8 @@
 
 Run locally:   streamlit run app/streamlit_app.py
 """
+import base64
+import io
 import os
 import sys
 from pathlib import Path
@@ -16,6 +18,19 @@ import streamlit as st  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import core  # noqa: E402
+
+
+def show_fig(fig, container=st):
+    """Render a figure as an inline PNG. Streamlit Cloud's media endpoint
+    returns HTTP 500 for st.pyplot images, so bypass it entirely."""
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    b64 = base64.b64encode(buf.getvalue()).decode()
+    container.markdown(
+        f'<img src="data:image/png;base64,{b64}" style="width:100%;height:auto;" alt="">',
+        unsafe_allow_html=True)
+
 
 st.set_page_config(page_title="AeroML", page_icon="✈️", layout="wide")
 
@@ -301,7 +316,7 @@ def plot_airfoil(geom, title):
 if result is None:
     st.info("Choose an airfoil and conditions in the sidebar, then press **Predict**.")
     s = st.session_state
-    st.pyplot(plot_airfoil({k: float(s[k]) for k in GEO_KEYS}, s["airfoil"]), use_container_width=True)
+    show_fig(plot_airfoil({k: float(s[k]) for k in GEO_KEYS}, s["airfoil"]))
 elif result["errors"]:
     for e in result["errors"]:
         st.error(e)
@@ -349,15 +364,14 @@ else:
                 ax.spines[sp].set_visible(False)
             ax.legend(frameon=False, fontsize=8)
             fig.tight_layout()
-            col.pyplot(fig, use_container_width=True)
-            plt.close(fig)
+            show_fig(fig, col)
         if result.get("step") is not None:
             st.caption(f"{result['n']} points at {result['step']}° spacing, "
                        f"predicted in {result['latency'] * 1e3:.1f} ms")
         if not has_truth:
             st.caption("No XFOIL reference shown: the geometry is custom/modified, or this airfoil has no "
                        "polar at this Reynolds number.")
-    st.pyplot(plot_airfoil(result["geom"], result["airfoil"]), use_container_width=True)
+    show_fig(plot_airfoil(result["geom"], result["airfoil"]))
     with st.expander("Predicted values", expanded=len(res) == 1):
         st.dataframe(res.style.format({"Alpha": "{:.2f}", "Cl": "{:.4f}", "Cd": "{:.5f}", "L/D": "{:.1f}"}),
                      use_container_width=True, hide_index=True)
